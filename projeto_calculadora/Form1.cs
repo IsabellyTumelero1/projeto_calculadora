@@ -15,6 +15,8 @@ namespace projeto_calculadora
     {
         decimal valor1 = 0, valor2 = 0;
         string operacao = "";
+
+        decimal value1 = 0, value2 = 0;
         public Form1()
         {
             InitializeComponent();
@@ -102,19 +104,17 @@ namespace projeto_calculadora
             }
             else if (operacao == "RAIZ")
             {
-                // Aqui valida se há algo no campo de texto, ou se a operação é raiz quadrada
                 if (txt_resultado.Text != "")
                 {
-                    // Verifica se o valor1 é maior ou igual a 0
                     if (valor1 >= 0)
                     {
                         double raiz = Math.Sqrt((double)valor1);
-                        txt_resultado.Text = raiz.ToString(CultureInfo.InvariantCulture); // Exibe o resultado com 2 casas decimais
+                        txt_resultado.Text = raiz.ToString(CultureInfo.InvariantCulture);
                     }
                     else
                     {
-                        MessageBox.Show("Não é possível calcular a raiz quadrada de um número negativo!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txt_resultado.Text = ""; // Limpa a tela em caso de erro
+                        MessageBox.Show("Não é possível calcular a raiz quadrada de um número negativo!", "Erro!");
+                        txt_resultado.Text = "";
                     }
                 }
             }
@@ -124,7 +124,7 @@ namespace projeto_calculadora
             }
             else if (operacao == "MOD")
             {
-                txt_resultado.Text = (valor1 % valor2).ToString("F2", CultureInfo.InvariantCulture);
+                txt_resultado.Text = (valor1 % valor2).ToString(CultureInfo.InvariantCulture);
             }
             else if (operacao == "PORC")
             {
@@ -208,11 +208,11 @@ namespace projeto_calculadora
             {
                 valor1 = decimal.Parse(txt_resultado.Text, CultureInfo.InvariantCulture);
                 operacao = "RAIZ";
-                lbl_operacao.Text = "√"; // Exibe o símbolo da raiz para indicar a operação
+                lbl_operacao.Text = "√";
             }
             else
             {
-                MessageBox.Show("Informe um valor para efetuar a divisão", "AVISO!");
+                MessageBox.Show("Informe um valor para efetuar a raiz", "AVISO!");
             }
         }
 
@@ -227,7 +227,7 @@ namespace projeto_calculadora
             }
             else
             {
-                MessageBox.Show("Informe um valor para efetuar a divisão", "AVISO!");
+                MessageBox.Show("Informe um valor para efetuar a exponenciação", "AVISO!");
             }
 
         }
@@ -251,7 +251,7 @@ namespace projeto_calculadora
             }
             else
             {
-                MessageBox.Show("Informe um valor para efetuar a divisão", "AVISO!");
+                MessageBox.Show("Informe um valor para efetuar o módulo", "AVISO!");
             }
         }
 
@@ -266,7 +266,79 @@ namespace projeto_calculadora
             }
             else
             {
-                MessageBox.Show("Informe um valor para efetuar a divisão", "AVISO!");
+                MessageBox.Show("Informe um valor para efetuar a porcentagem", "AVISO!");
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtB_valor1_TextChanged(object sender, EventArgs e)
+        {
+            value1 = decimal.Parse(txtB_valor1.Text, CultureInfo.InvariantCulture);
+        }
+
+        private void txtB_valor2_TextChanged(object sender, EventArgs e)
+        {
+            value2 = decimal.Parse(txtB_valor2.Text, CultureInfo.InvariantCulture);
+        }
+
+        private void btn_limpar_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtB_result1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtB_segundoValor_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_calcular2_Click(object sender, EventArgs e)
+        {
+            decimal resultadoSoma = decimal.Parse(txtB_result1.Text, CultureInfo.InvariantCulture);
+            decimal segundoValor = decimal.Parse(txtB_segundoValor.Text, CultureInfo.InvariantCulture);
+            decimal resultadoSubtracao = resultadoSoma - segundoValor;
+            txtB_result2.Text = Convert.ToString(resultadoSubtracao, CultureInfo.InvariantCulture);
+            txtB_primeiroValor.Text = txtB_valor1.Text;
+            txtB_resultDois.Text = txtB_result2.Text;
+        }
+
+        private void txtB_primeiroValor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_calcular3_Click(object sender, EventArgs e)
+        {
+            decimal primeiroValor = decimal.Parse(txtB_primeiroValor.Text, CultureInfo.InvariantCulture);
+            decimal resultadoDois = decimal.Parse(txtB_resultDois.Text, CultureInfo.InvariantCulture);
+            decimal resultadoMultiplica = primeiroValor * resultadoDois;
+            txtB_result3.Text = Convert.ToString(resultadoMultiplica, CultureInfo.InvariantCulture);
+        }
+
+        private void btn_calcular_Click(object sender, EventArgs e)
+        {
+            if (txtB_valor1.Text != "" || txtB_valor2.Text != "")
+            {
+                txtB_result.Text = Convert.ToString(value1 + value2, CultureInfo.InvariantCulture);
+                txtB_result1.Text = txtB_result.Text;
+                txtB_segundoValor.Text = txtB_valor2.Text;
+            }
+            else
+            {
+                MessageBox.Show("Informe algum número nos campos acima!", "AVISO!");
             }
         }
 
